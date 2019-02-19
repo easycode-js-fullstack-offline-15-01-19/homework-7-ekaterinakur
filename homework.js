@@ -8,10 +8,18 @@
    * @description для создания объекта, содержащего первый аргумент функции и массив из остатка входящих аргументов ф-ции
    * @returns {object} объект   
    */
-function getObj() {
-	const [first, ...other] = arguments;
-	return {first: first, other: other};
+function getObj(first, ...other) {
+	return {
+		first: first,
+		other: [other]
+	};
 }
+
+//  или (до правок) ------------
+// function getObj() {
+// 	const [first, ...other] = arguments;
+// 	return {first: first, other: other};
+// }
 
 getObj('a', 'b', 'c', 'e', 'd');
 
@@ -40,9 +48,8 @@ getInfo(organisation);
 //  3. Переделать функцию с использованием функции-стрелки (в методе reduce тоже использовать arrow function)
 
 const sum = (...props) => {
-	const params = Array.prototype.slice.call(props);
-	if (!params.length) return 0;
-  	return params.reduce((prev, next) => prev + next);
+	if (!props.length) return 0;
+  	return props.reduce((prev, next) => prev + next);
 }
 
 sum(1, 2, 3, 4); // 10
